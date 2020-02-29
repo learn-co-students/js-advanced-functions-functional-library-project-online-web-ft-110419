@@ -124,8 +124,8 @@ const fi = (function() {
       return newArray;
     },
     
-    uniq: function(array, sorted, callback) {
-      if (sorted) {
+    uniq: function(array, isSorted, callback) {
+      if (isSorted) {
         return function(array, callback) {
           const sortedArray = [array[0]];
           for (let i = 1; i < collection.length; i++) {

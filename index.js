@@ -60,9 +60,10 @@ const fi = (function() {
       } else {
         return undefined
       }
-    }
+    },
+  
 
-    find: function(collection, predicate) {
+    filter: function(collection, predicate) {
       let newCollection = []
       if (Array.isArray(collection)){
         for (let i = 0; i < collection.length; i++){
@@ -74,7 +75,33 @@ const fi = (function() {
         return undefined
       }
       return newCollection
-    }
+    },
+
+    size: function(collection) {
+      if (Array.isArray(collection)){
+        return collection.length
+      } else {
+        return Object.values(collection).length
+      }
+    },
+
+    first: function(array, n) {
+      if (n) {
+        return array.slice(0,n)
+      } else
+      return array[0]
+    },
+
+    last: function(array, n) {
+      if (n) {
+        return array.slice(array.length-n)
+      } else
+      return array[array.length-1]
+    },
+
+
+
+
 
 
 

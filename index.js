@@ -136,22 +136,36 @@ const fi = (function() {
       return Object.values(object)
     },
 
-// NOT WORKING
-    unique: function(array, [isSorted], [callback]) {
-
-    },
-
-// NOT WORKING
-    // functions: function(object){
-    //   let array = Object.values(object).sort()
-    // },
-
     functions: function(object) {  
-      return object.sort(function(a, b){
-        return a - b
-      })      
+      let array = []
+
+      for (let key in object) {
+        if (typeof object[key] === "function"){
+          array.push(key)
+        }
+      }
+      return array.sort()   
     },
 
+// need to work on this one with instructor
+    uniq: function(collection, sorted=false, iteratee=false) {
+      if (sorted) {
+        return fi.uniqSorted(collection, iteratee)
+      } else if (!iteratee) {
+        return Array.from(new Set(collection))
+      } else {
+        const modifiedVals = new Set()
+        const uniqVals = new Set()
+        for (let val of collection) {
+          const moddedVal = iteratee(val)
+          if (!modifiedVals.has(moddedVal)) {
+            modifiedVals.add(moddedVal)
+            uniqVals.add(val)
+          }
+        }
+        return Array.from(uniqVals)
+      }
+    },
   }
 })()
 

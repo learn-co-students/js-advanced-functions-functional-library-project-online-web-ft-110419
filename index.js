@@ -102,15 +102,18 @@ const fi = (function() {
     compact: function(array) {
       let newArray = []
       for (let i = 0; i < array.length; i++){
-        if (array[i] === true) {
+        if (array[i]) {
           newArray.push(array[i])
         }
       }
       return newArray
+    },
 
-
-
-
+    sortBy: function(array, callback) {
+      let arrayCopy = [...array]
+      return arrayCopy.sort(function(a,b) {
+        return callback(a) - callback(b)
+      })
     },
 
 

@@ -142,8 +142,14 @@ const fi = (function() {
     },
 
 // NOT WORKING
-    functions: function(object){
-      let array = Object.values(object).sort()
+    // functions: function(object){
+    //   let array = Object.values(object).sort()
+    // },
+
+    functions: function(object) {  
+      return object.sort(function(a, b){
+        return a - b
+      })      
     },
 
   }

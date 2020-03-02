@@ -62,6 +62,21 @@ const fi = (function() {
       }
     }
 
+    find: function(collection, predicate) {
+      let newCollection = []
+      if (Array.isArray(collection)){
+        for (let i = 0; i < collection.length; i++){
+          if(predicate(collection[i])){
+            newCollection.push(collection[i])
+          }
+        } 
+      } else {
+        return undefined
+      }
+      return newCollection
+    }
+
+
 
   }
 })()

@@ -99,6 +99,19 @@ const fi = (function() {
       return array[array.length-1]
     },
 
+    compact: function(array) {
+      let newArray = []
+      for (let i = 0; i < array.length; i++){
+        if (array[i] === true) {
+          newArray.push(array[i])
+        }
+      }
+      return newArray
+
+
+
+
+    },
 
 
 

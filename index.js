@@ -116,6 +116,18 @@ const fi = (function() {
       })
     },
 
+    flatten: function(array, shallow) {
+      let newArray = []
+      if (shallow)
+        let joined = array.join().split(",")
+        for (let i = 0; i < joined.length; i++){
+          newArray.push(parseInt(joined[i]))
+        }
+      }
+    },
+
+
+
 
 
 

@@ -144,15 +144,7 @@ const fi = (function() {
 // NOT WORKING
     functions: function(object){
       let array = Object.values(object).sort()
-
     },
-
-
-
-
-
-
-
 
   }
 })()

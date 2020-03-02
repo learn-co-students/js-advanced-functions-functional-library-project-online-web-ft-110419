@@ -118,12 +118,33 @@ const fi = (function() {
 
     flatten: function(array, shallow) {
       let newArray = []
-      if (shallow)
-        let joined = array.join().split(",")
-        for (let i = 0; i < joined.length; i++){
-          newArray.push(parseInt(joined[i]))
-        }
+      let joined
+      if (!shallow) {
+        return joined = array.join().split(",").map(e => parseInt(e))
+      } else {
+        return joined = array.flat(1)
       }
+    },
+
+
+
+    keys: function(object){
+      return Object.keys(object)
+    },
+
+    values: function(object){
+      return Object.values(object)
+    },
+
+// NOT WORKING
+    unique: function(array, [isSorted], [callback]) {
+
+    },
+
+// NOT WORKING
+    functions: function(object){
+      let array = Object.values(object).sort()
+
     },
 
 

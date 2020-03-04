@@ -65,14 +65,38 @@ const fi = (function() {
             .flat();
     },
 
-    uniq: function(collection) {
-      let obj = {};
-      let iCollection =
-        typeof collection[0] == "object"
-          ? collection.map(obj => Object.values(obj)).flat()
-          : collection;
-      iCollection.forEach(n => (obj[n] = null));
-      return Object.keys(obj);
+    // uniq: function(col, sorted = false, iteratee = false) {
+    //   let obj = {};
+    //   let newCol = col.map(obj => Object.values(obj)).flat();
+    //   let collection = typeof col[0] == "object" ? newCol : col;
+    //   collection.forEach(n => (obj[n] = null));
+    //   return sorted ? Object.keys(obj).sort() : Object.keys(obj);
+    // },
+    uniqSorted: function(collection, iteratee) {
+      const sorted = [collection[0]];
+      for (let idx = 1; idx < collection.length; idx++) {
+        if (sorted[idx - 1] !== collection[idx]) sorted.push(collection[idx]);
+      }
+      return sorted;
+    },
+
+    uniq: function(collection, sorted = false, iteratee = false) {
+      if (sorted) {
+        return fi.uniqSorted(collection, iteratee);
+      } else if (!iteratee) {
+        return Array.from(new Set(collection));
+      } else {
+        const modifiedVals = new Set();
+        const uniqVals = new Set();
+        for (let val of collection) {
+          const moddedVal = iteratee(val);
+          if (!modifiedVals.has(moddedVal)) {
+            modifiedVals.add(moddedVal);
+            uniqVals.add(val);
+          }
+        }
+        return Array.from(uniqVals);
+      }
     },
 
     keys: function(obj) {
@@ -84,7 +108,7 @@ const fi = (function() {
     },
 
     functions: function(obj) {
-      fncObjs = Object.entries(obj).filter(a => typeof a[1] == "function");
+      let fncObjs = Object.entries(obj).filter(a => typeof a[1] == "function");
       return fncObjs.map(a => a[0]).sort();
     }
   };
